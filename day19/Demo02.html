@@ -37,14 +37,13 @@
 
     function getAllListItem() {
         // 返回页面中所有li标签
-        return document.getElementsByTagName("li");
+        return document.querySelectorAll("li");
     }
 
     function findAllHtmlSpanInOneSection(sectionId) {
         // 返回某个section下所有span中内容为HTML的span标签
-        var section = document.getElementById(sectionId);
         var newArray = new Array();
-        var spanArray = section.getElementsByTagName("span");
+        var spanArray = document.querySelectorAll("#"+sectionId+" span");
         var spanlen = spanArray.length;
         for(let j=0 ; j<spanlen ; j++){
             if(spanArray[j].innerHTML == "HTML"){
@@ -56,9 +55,8 @@
 
     function findListItem(sectionId, spanCont) {
         // 返回某个section下，所有所包含span内容为spanCont的LI标签
-        var section = document.getElementById(sectionId);
         var newArray = new Array();
-        var liArray = section.getElementsByTagName("span");
+        var liArray = document.querySelectorAll("#"+sectionId+" span");
         var lilen = liArray.length;
         for(let j=0 ; j<lilen ; j++){
             if(liArray[j].innerHTML == spanCont){
@@ -70,9 +68,8 @@
 
     function getActiveLinkContent(sectionId) {
         // 返回某个section下，class为active的链接中包含的文字内容
-        var section = document.getElementById(sectionId);
         var newArray = new Array();
-        var linkArray = section.getElementsByClassName("active");
+        var linkArray = document.querySelectorAll("#"+sectionId+" .active");
         var linklen = linkArray.length;
         for(let j=0 ; j<linklen ; j++){
             newArray.push(linkArray[j].innerHTML);
