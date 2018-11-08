@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>IFday20-21</title>
+    </head>
+    <body>
+        <input id="name" type="text" onkeydown="enterEvent()">    
+        <button id="submit-btn">Submit</button>
+        <script>
+            var btn = document.getElementById("submit-btn");
+            btn.addEventListener("click",function(){
+                var name = document.getElementById("name");
+                console.log(name.value);
+            });
+           function enterEvent(event){
+                var e = event || window.event;
+                if(e.keyCode == 13 || e.keyCode == 10){
+                    var name = document.getElementById("name");
+                    console.log(name.value);
+                }else if(e.keyCode == 27){
+                    var name = document.getElementById("name");
+                    name.value = "";
+                }
+            }
+        </script>
+    </body>
+</html>
