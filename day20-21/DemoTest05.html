@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>IFday20-21</title>
+</head>
+<body>
+    <div id="fade-obj" style="width:300px;height:300px;background:#000"></div>
+    <button id="fade-btn">淡出</button>
+    <script>
+        var btn = document.getElementById("fade-btn");
+        var alpha = 100;
+        var flag;
+        btn.onclick = function(){
+            btn.disabled = true;
+            if(btn.innerHTML == "淡出"){
+                flag = setInterval(fadeOut, 100);
+            }else {
+                flag = setInterval(fadeIn, 100);
+            }
+        }
+        function fadeOut(){
+            var div = document.getElementById("fade-obj");
+            if(div.style.opacity != "0"){
+                alpha -= 1;
+                div.style.opacity = alpha /100;
+            }else{
+                clearInterval(flag);
+                btn.innerHTML = "淡入";
+                btn.disabled = false;
+            }
+        }
+        function fadeIn(){
+            var div = document.getElementById("fade-obj");
+            if(div.style.opacity != "1"){
+                alpha += 1;
+                div.style.opacity = alpha /100;
+            }else{
+                clearInterval(flag);
+                btn.innerHTML = "淡出";
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
