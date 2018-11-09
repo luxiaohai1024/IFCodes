@@ -1,0 +1,35 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+h1 {
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+h2 {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+table {
+	
+}
+.thtd-block {
+	display: block;
+	text-align: left;
+} 
+.tr-inline{
+	display: inline;
+	margin-right: 30px;
+
+}
+.tr-block1{
+	margin-bottom: 20px;
+	display: block;
+}
+.tr-inline th {
+	display: inline;
+}
+.tr-inline td{
+	display: inline;
+	margin-left: 5px;
+}

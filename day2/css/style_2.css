@@ -1,0 +1,48 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+h1 {
+	margin-bottom: 20px;
+	margin-top: 55px;
+	text-align: center;
+	color: #fff;
+}
+h2 {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+table {
+	
+}
+.thtd-block {
+	display: block;
+	text-align: left;
+} 
+.tr-inline{
+	display: inline;
+	margin-right: 30px;
+
+}
+.tr-block1{
+	margin-bottom: 20px;
+	display: block;
+}
+.tr-inline th {
+	display: inline;
+}
+.tr-inline td{
+	display: inline;
+	margin-left: 5px;
+}
+.left {
+	float: left;
+	width: 28%;
+	height: 700px;
+	background-color: #6699FF;
+}
+.content {
+	float: right;
+	width: 70%;
+	padding-left: 3px;
+}
