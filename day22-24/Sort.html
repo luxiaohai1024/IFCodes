@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Sort</title>
+    </head>
+    <body>
+        <p>原数组：var arr = [43, 54, 4, -4, 84, 100, 58, 27, 140];</p>
+        <p>排序后：</p>
+        <p id="array1"></p>
+        <p>原数组：var arr = ['apple', 'dog', 'cat', 'car', 'zoo', 'orange', 'airplane'];</p>
+        <p>排序后：</p>
+        <p id="array2"></p>
+        <p>原数组：var arr = [[10, 14], [16, 60], [7, 44], [26, 35], [22, 63]];</p>
+        <p>排序后：</p>
+        <p id="array3"></p>
+        <p>原数组：</p>
+        <code>var arr = [
+            {
+                id: 1,
+                name: 'candy',
+                value: 40
+            }, {
+                id: 2,
+                name: 'Simon',
+                value: 50
+            }, {
+                id: 3,
+                name: 'Tony',
+                value: 45
+            }, {
+                id: 4,
+                name: 'Annie',
+                value: 60
+            }
+        ];</code>
+        <p>排序后：</p>
+        <p id="array4"></p>
+        <script>
+            var array1 = document.getElementById("array1");
+            var array2 = document.getElementById("array2");
+            var array3 = document.getElementById("array3");
+            var array4 = document.getElementById("array4");
+            
+            var arr1 = [43, 54, 4, -4, 84, 100, 58, 27, 140];
+            var arr2 = ['apple', 'dog', 'cat', 'car', 'zoo', 'orange', 'airplane'];
+            var arr3 = [[10, 14], [16, 60], [7, 44], [26, 35], [22, 63]];
+            var arr4 = [
+                        {
+                            id: 1,
+                            name: 'candy',
+                            value: 40
+                        }, {
+                            id: 2,
+                            name: 'Simon',
+                            value: 50
+                        }, {
+                            id: 3,
+                            name: 'Tony',
+                            value: 45
+                        }, {
+                            id: 4,
+                            name: 'Annie',
+                            value: 60
+                        }
+                    ];
+            arr1 = quickSort(arr1).reverse();
+            array1.innerHTML = print(arr1);
+            arr2 = quickSort(arr2);
+            array2.innerHTML = "按a-z排序：\n";
+            array2.innerHTML += strPrint((quickSort(arr2))) + "\n";
+            array2.innerHTML += "按z-a排序：\n";
+            array2.innerHTML += strPrint(quickSort(arr2).reverse()) + "\n";
+            arr3 = quickSort2(arr3).reverse();
+            array3.innerHTML = strPrint2(arr3);
+            arr4 = objQuickSort(arr4);
+            array4.innerHTML = objPrint(arr4);
+            function quickSort2(arr) {
+            　　if (arr.length <= 1) { return arr; }
+            　　var pivotIndex = Math.floor(arr.length / 2);
+            　　var pivot = arr.splice(pivotIndex, 1)[0];
+            　　var left = [];
+            　　var right = [];
+            　　for (var i = 0; i <arr.length; i++){
+            　　　　if (arr[i][1] < pivot[1]) {
+            　　　　　　left.push(arr[i]);
+            　　　　} else {
+            　　　　　　right.push(arr[i]);
+            　　　　}
+            　　}
+            　　return quickSort(left).concat([pivot], quickSort(right));
+            }
+            function objQuickSort(arr) {
+            　　for(let i=0; i<arr.length-1; i++){
+                    max = arr[i]["value"];
+                    for(let j=0; j<arr.length-1-i; j++){
+                        if(arr[j].value > arr[j+1].value){
+                            var temp = arr[j];
+                            arr[j] = arr[j+1];
+                            arr[j+1] = temp;
+                        }
+                    }
+                }
+                return arr;
+            }
+            function quickSort(arr) {
+            　　if (arr.length <= 1) { return arr; }
+            　　var pivotIndex = Math.floor(arr.length / 2);
+            　　var pivot = arr.splice(pivotIndex, 1)[0];
+            　　var left = [];
+            　　var right = [];
+            　　for (var i = 0; i <arr.length; i++){
+            　　　　if (arr[i] < pivot) {
+            　　　　　　left.push(arr[i]);
+            　　　　} else {
+            　　　　　　right.push(arr[i]);
+            　　　　}
+            　　}
+            　　return quickSort(left).concat([pivot], quickSort(right));
+            }
+            function print(arr){
+                var str="arr = [";
+                for(let i=0; i<arr.length-1; i++){
+                    str += arr[i] + " , "
+                }
+                str += arr[arr.length-1] + " ]";
+                return str;
+            }
+            function strPrint(arr){
+                var str="arr = [";
+                for(let i=0; i<arr.length-1; i++){
+                    str += "'" + arr[i] + "'" + " , "
+                }
+                str += "'" + arr[arr.length-1] + "'" + " ]";
+                return str;
+            }
+            function strPrint2(arr){
+                var str="arr = [";
+                for(let i=0; i<arr.length; i++){
+                    str += "["
+                    for(let j=0; j<arr[i].length-1; j++){
+                        str += "'" + arr[i][j] + "'" + " , "
+                    }
+                    str += "'" + arr[i][arr[i].length-1] + "'" + " ] , ";
+                }
+                str = str.slice(0,str.lastIndexOf(','));
+                str += "]";
+                return str;
+            }
+            function objPrint(arr){
+                var str = "[ ";
+                for(let i=0; i<arr.length; i++){
+                    str += "{ id: " + arr[i].id + ", name: '" + arr[i].name + "' ,value: " + arr[i].value + "} ,"
+                }
+                str = str.slice(0,str.lastIndexOf(",")) + "]";
+                return str;
+            }
+        </script>
+    </body>
+</html>

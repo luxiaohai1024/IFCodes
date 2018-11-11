@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>IFcodeStacks</title>
+    </head>
+    <body>
+        <input id="stack-input" type="text">
+        <p id="stack-cont">栈内容：apple-&gt;pear</p>    
+        <button id="push-btn">进栈</button>
+        <button id="pop-btn">退栈</button>
+        <button id="font-btn">打印栈顶元素内容</button>
+        <button id="empty-btn">判断栈是否为空</button>
+        <script>
+        var stack = ["apple", "pear"];
+        var p = document.getElementById("stack-cont");
+        var inBtn = document.getElementById("push-btn");
+        var outBtn = document.getElementById("pop-btn");
+        var fontBtn = document.getElementById("font-btn");
+        var emptyBtn = document.getElementById("empty-btn");
+        var input = document.getElementById("stack-input");
+        
+        inBtn.onclick = function(){
+            stack.push(document.getElementById("stack-input").value);
+            p.innerHTML = getStack(); 
+        }
+        outBtn.onclick = function(){
+            stack.pop();
+            p.innerHTML = getStack(); 
+        }
+        fontBtn.onclick = function(){
+            p.innerHTML = "栈顶元素为: " + stack[0];
+        }
+        emptyBtn.onclick = function(){
+            p.innerHTML = "栈是否为空： " + (stack.length == 0);
+        }
+        function getStack(){
+            var str = "栈内容：";
+            for(var i=0; i< stack.length-1 ; i++){
+                str += stack[i] + "-&gt;";
+            }
+            if(stack.length){
+                str += stack[stack.length-1];
+            }
+            return str;
+        }
+        </script>
+    </body>
+</html>
