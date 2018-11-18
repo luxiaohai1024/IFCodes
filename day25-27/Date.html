@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>IFcodeClock</title>
+        <style>
+            h1 {
+                text-align: center;
+                font-size: 50px;
+                color: coral;
+            }
+            #shi {
+                color: brown;
+            }
+            #fen {
+                color: crimson;
+            }
+            #miao {
+                color: deeppink;
+            }
+        </style>
+    </head>
+    <body>
+        <h1><span id="dateTime"></span> &nbsp; &nbsp;<span id="shi"></span>: <span id="fen"></span>: <span id="miao"></span></h1>
+        <script>
+            var dateTime = document.getElementById("dateTime");
+            var shi = document.getElementById("shi");
+            var fen = document.getElementById("fen");
+            var miao = document.getElementById("miao");
+            var flag = setInterval(print2,1000);
+
+            function print2(){
+                var date = new Date();
+                dateTime.innerHTML = date.getFullYear() + " - " + toBeTwo(date.getMonth()) + " - " + toBeTwo(date.getDate()) + "   " + toDay2(date.getDay());
+                shi.innerHTML = toBeTwo(date.getHours());
+                fen.innerHTML = toBeTwo(date.getMinutes());
+                miao.innerHTML = toBeTwo(date.getSeconds());
+                if(date.getHours() < 12){
+                    miao.innerHTML += " &nbsp;&nbsp;&nbsp;&nbsp;AM";
+                }else {
+                    miao.innerHTML += " &nbsp;&nbsp;&nbsp;&nbsp;FM";
+                }
+            }
+            function print(){
+                var date = new Date();
+                dateTime.innerHTML = date.getFullYear() + " 年 " + toBeTwo(date.getMonth()) + " 月 " + toBeTwo(date.getDate()) + " 日 " + toDay(date.getDay());
+                shi.innerHTML = toBeTwo(date.getHours());
+                fen.innerHTML = toBeTwo(date.getMinutes());
+                miao.innerHTML = toBeTwo(date.getSeconds());
+            }
+            function toBeTwo(num){
+                if(String(num).length == 1){
+                    return "0" + num;
+                }else {
+                    return num;
+                }
+            }
+            function toDay(num){
+                switch(num){
+                    case 0 : return "星期日";break;
+                    case 1 : return "星期一";break;
+                    case 2 : return "星期二";break;
+                    case 3 : return "星期三";break;
+                    case 4 : return "星期四";break;
+                    case 5 : return "星期五";break;
+                    case 6 : return "星期六";break;
+                    default : break;
+                }
+            }
+            function toDay2(num){
+                switch(num){
+                    case 0 : return "Sunday";break;
+                    case 1 : return "Monday";break;
+                    case 2 : return "Tuesday";break;
+                    case 3 : return "Wednesday";break;
+                    case 4 : return "Thursday";break;
+                    case 5 : return "Friday";break;
+                    case 6 : return "Saturday";break;
+                    default : break;
+                }
+            }
+        </script>
+    </body>
+</html>
