@@ -87,8 +87,8 @@
                     <option value="27">27</option>
                     <option value="28">28</option>
                     <option value="29">29</option>
-                    <option value="30">30</option>
-                    <option value="31">31</option>
+                    <option value="30" class="specialDay30">30</option>
+                    <option value="31" class="specialDay31">31</option>
                 </select>
                 
                 <select id="hour-select">
@@ -243,8 +243,143 @@
             var hour = document.getElementById("hour-select");
             var minite = document.getElementById("minite-select");
             var second = document.getElementById("second-select");
-            year.
+            var the30 = document.getElementsByClassName("specialDay30")[0];
+            var the31 = document.getElementsByClassName("specialDay31")[0];
 
+            var setYear = 2000,
+                setMonth = 1,
+                setDay = 1,
+                setHour = 0,
+                setMinite = 0,
+                setSecond = 0,
+                nowYear,
+                nowMonth,
+                nowDay,
+                nowHour,
+                nowMinite,
+                nowSecond;
+            year.onchange = function(){
+                var index = year.selectedIndex ;
+                setYear = year.options[index].value;
+            }
+            month.onchange = function(){
+                var index = month.selectedIndex ;
+                setMonth = month.options[index].value;
+                if(setMonth == 2){
+                    the30.style.display = 'none';
+                    the31.style.display = 'none';
+                    if(setDay == 31 || setDay == 30){
+                        setDay = 29;
+                        day.value = 29;
+                    }
+                }else if(setMonth == 1 || setMonth == 3 || setMonth == 5 || 
+                setMonth == 7 || setMonth == 8 || setMonth == 10 || 
+                setMonth == 12){
+                    the30.style.display = 'block';
+                    the31.style.display = 'block';
+                }else {
+                    the30.style.display = 'block';
+                    the31.style.display = 'none';
+                    if(setDay == 31){
+                        setDay = 30;
+                        day.value = 30;
+                    }
+                }
+            }
+            day.onchange = function(){
+                var index = day.selectedIndex ;
+                setDay = day.options[index].value;
+            }
+            hour.onchange = function(){
+                var index = hour.selectedIndex ;
+                setHour = hour.options[index].value;
+            }
+            minite.onchange = function(){
+                var index = minite.selectedIndex ;
+                setMinite = minite.options[index].value;
+            }
+            second.onchange = function(){
+                var index = second.selectedIndex ;
+                setSecond = second.options[index].value;
+            }
+
+
+            var flag = setInterval(print,1000);
+
+
+            function print(){
+                var date = new Date();
+                nowYear = date.getFullYear();
+                nowMonth = date.getMonth() + 1;
+                nowDay = date.getDate();
+                nowHour = date.getHours();
+                nowMinite = date.getMinutes();
+                nowSecond = date.getSeconds();
+                p.innerHTML = "现在距离" + nowYear + " 年 " + toBeTwo(nowMonth) + " 月 " 
+                + toBeTwo(nowDay) + " 日 " + toDay(date.getDay()) + toBeTwo(nowHour) + ":" 
+                + toBeTwo(nowMinite) + ":" + toBeTwo(nowSecond);
+                if(setYear > nowYear ? true : setYear < nowYear 
+                    ? false : setMonth > nowMonth ? true : setMonth < nowMonth 
+                    ? false : setDay > nowDay ? true : setDay < nowDay
+                    ? false : setHour > nowHour ? true : setHour < nowHour
+                    ? false : setMinite > nowMinite ? true : setMinite < nowMinite
+                    ? false : setSecond > nowSecond ){
+                        var timeDay = howManeyDayYear(nowYear,setYear) + howManeyDayMonth(nowMonth,setMonth) + (setDay - nowDay);
+                        var timeInSecond = timeDay*86400 + (setHour - nowHour)*3600 + (setMinite - nowMinite)*60 + (setSecond - nowSecond);
+                        var theday = Math.floor(timeInSecond/86400);
+                        var thehour = Math.floor((timeInSecond - theday*86400)/3600);
+                        var theminite = Math.floor((timeInSecond - theday*86400 -thehour*3600)/60);
+                        var thesecond = timeInSecond - theday*86400 - thehour*3600 - theminite*60;
+                        p.innerHTML += "还有" + toBeTwo(theday) + "天" + toBeTwo(thehour) + "时" + toBeTwo(theminite) + "分" + toBeTwo(thesecond) + "秒";
+                }else {
+                    var timeDay = howManeyDayYear(setYear,nowYear) + howManeyDayMonth(setMonth,nowMonth) + (nowDay - setDay);
+                    var timeInSecond = timeDay*86400 + (nowHour - setHour)*3600 + (nowMinite - setMinite)*60 + (nowSecond - setSecond);
+                    var theday = Math.floor(timeInSecond/86400);
+                    var thehour = Math.floor((timeInSecond - theday*86400)/3600);
+                    var theminite = Math.floor((timeInSecond - theday*86400 -thehour*3600)/60);
+                    var thesecond = timeInSecond - theday*86400 - thehour*3600 - theminite*60;
+                    p.innerHTML += "已经过去" + toBeTwo(theday) + "天" + toBeTwo(thehour) + "时" + toBeTwo(theminite) + "分" + toBeTwo(thesecond) + "秒";
+                }
+            }
+
+            function howManeyDayMonth(firstMonty,secondMonth){
+                var dayNumber = 0;
+                var flag = 1;
+                if(firstMonty == secondMonth){
+                    return dayNumber;
+                }else if(firstMonty > secondMonth){
+                    var temp = firstMonty;
+                    firstMonty = secondMonth;
+                    secondMonth = temp;
+                    flag = -1;
+                }
+                for(var i = firstMonty ; i < secondMonth ; i++){
+                    if(i == 2){
+                        dayNumber += 29;
+                    }else if(i == 1 || i == 3 || i == 5 || 
+                        i == 7 || i == 8 || i == 10 || 
+                        i == 12){
+                        dayNumber += 31;
+                    }else{
+                        dayNumber += 30;
+                    }
+                }
+                return dayNumber*flag;
+            }
+            function howManeyDayYear(smallYear,bigYear){
+                var dayNumber = 0;
+                for(var i = smallYear; i < bigYear; i++){
+                    if(isRenYear(i)){
+                        dayNumber += 366;
+                    }else {
+                        dayNumber += 365;
+                    }
+                }
+                return dayNumber;
+            }
+            function isRenYear(year){ 
+                return(0 == year%4 && (year%100 !=0 || year%400 == 0));
+            }
             function toBeTwo(num){
                 if(String(num).length == 1){
                     return "0" + num;
