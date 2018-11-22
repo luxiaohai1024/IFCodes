@@ -48,29 +48,29 @@ body {
   float: left;
 }
 .nav-icon .icon-pic1 {
-  background-image: url("file:///E:/百度前端学院/12_15/images/12_15_06.png");
+  background-image: url("../images/12_15_06.png");
   background-size: 100% 100%;
 }
 .nav-icon .icon-pic2 {
-  background-image: url("file:///E:/百度前端学院/12_15/images/12_15_19.png");
+  background-image: url("../images/12_15_19.png");
   background-size: 100% 100%;
 }
 .nav-icon .icon-pic3 {
-  background-image: url("file:///E:/百度前端学院/12_15/images/12_15_33.png");
+  background-image: url("../images/12_15_33.png");
   background-size: 100% 100%;
 }
 .nav-icon .icon-pic4 {
-  background-image: url("file:///E:/百度前端学院/12_15/images/12_15_40.png");
+  background-image: url("../images/12_15_40.png");
   background-size: 100% 100%;
 }
 .bottom-icon .icon-pic5 {
-  background-image: url("file:///E:/百度前端学院/12_15/images/12_15_89.png");
+  background-image: url("../images/12_15_89.png");
   background-size: 100% 100%;
   margin-left: 15px;
   margin-right: 10px;
 }
 .bottom-icon .icon-pic6 {
-  background-image: url("file:///E:/百度前端学院/12_15/images/12_15_91.png");
+  background-image: url("../images/12_15_91.png");
   background-size: 100% 100%;
 }
 .bottom-icon {
@@ -150,7 +150,7 @@ body {
 .mian-box .nav-menu .second-menu .tool-pic {
   width: 15px;
   height: 15px;
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_91.png);
+  background-image: url(../images/12_15_91.png);
   background-size: 100% 100%;
   float: right;
   position: absolute;
@@ -159,7 +159,7 @@ body {
 .mian-box .nav-menu .second-menu1 .number-pic {
   width: 30px;
   height: 23px;
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_21.png);
+  background-image: url(../images/12_15_21.png);
   background-size: 100% 100%;
   float: right;
   position: absolute;
@@ -186,25 +186,25 @@ body {
   left: 30px;
 }
 .mian-box .nav-menu .second-menu .small-pic1 {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_46.png);
+  background-image: url(../images/12_15_46.png);
   top: 30px;
 }
 .mian-box .nav-menu .second-menu .small-pic2 {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_52.png);
+  background-image: url(../images/12_15_52.png);
   top: 57px;
 }
 .mian-box .nav-menu .second-menu .small-pic3 {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_55.png);
+  background-image: url(../images/12_15_55.png);
   top: 87px;
 }
 .mian-box .nav-menu .second-menu .small-pic4 {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_58.png);
+  background-image: url(../images/12_15_58.png);
   top: 117px;
 }
 .mian-box .nav-menu .second-menu3 .number-pic {
   width: 30px;
   height: 23px;
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_64.png);
+  background-image: url(../images/12_15_64.png);
   background-size: 100% 100%;
   float: right;
   position: absolute;
@@ -214,7 +214,7 @@ body {
 .mian-box .nav-menu .second-menu3 .Danger-pic {
   width: 20px;
   height: 20px;
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_69.png);
+  background-image: url(../images/12_15_69.png);
   background-size: 100% 100%;
   float: right;
   position: absolute;
@@ -247,7 +247,7 @@ body {
   margin: 13px 0;
 }
 .text-area .top-message .personlIcon .icon {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_03.png);
+  background-image: url(../images/12_15_03.png);
   width: 50px;
   height: 50px;
   margin-right: 10px;
@@ -267,7 +267,7 @@ body {
 }
 .text-area .top-message .personlIcon .more-icon {
   float: left;
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_88.png);
+  background-image: url(../images/12_15_88.png);
   width: 13px;
   height: 8px;
   background-size: 100% 100%;
@@ -294,7 +294,7 @@ body {
    display: none;
 }
 .text-area .two-textarea .left-area .select-area .icon-select {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_23.png);
+  background-image: url(../images/12_15_23.png);
   width: 10px;
   height: 10px;
   background-size: 100% 100%;
@@ -378,25 +378,25 @@ body {
   visibility: hidden;
 }
 .text-area .two-textarea .left-area .message-box .message-lite .user .face-pic1 {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_31.png);
+  background-image: url(../images/12_15_31.png);
 }
 .text-area .two-textarea .left-area .message-box .message-lite .user .face-pic2 {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_44.png);
+  background-image: url(../images/12_15_44.png);
 }
 .text-area .two-textarea .left-area .message-box .message-lite .user .face-pic3 {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_59.png);
+  background-image: url(../images/12_15_59.png);
 }
 .text-area .two-textarea .left-area .message-box .message-lite .user .face-pic4 {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_65.png);
+  background-image: url(../images/12_15_65.png);
 }
 .text-area .two-textarea .left-area .message-box .message-lite .user .face-pic5 {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_71.png);
+  background-image: url(../images/12_15_71.png);
 }
 .text-area .two-textarea .left-area .message-box .message-lite .user .face-pic6 {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_81.png);
+  background-image: url(../images/12_15_81.png);
 }
 .text-area .two-textarea .left-area .message-box .message-lite .user .face-pic7 {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_83.png);
+  background-image: url(../images/12_15_83.png);
 }
 .text-area .two-textarea .right-area {
   width: 70%;
@@ -423,7 +423,7 @@ body {
   height: 35px;
   background-size: 100% 100%;
   float: left;
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_15.png);
+  background-image: url(../images/12_15_15.png);
 }
 .text-area .two-textarea .right-area .user-nav .words {
   color: #56688a;
@@ -443,7 +443,7 @@ body {
   width: 75px;
   height: 35px;
   background-size: 100% 100%;
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_17.png);
+  background-image: url(../images/12_15_17.png);
 }
 .text-area .two-textarea .right-area .main-message {
   width: 100%;
@@ -463,27 +463,27 @@ body {
   background-size: 100% 100%;
 }
 .text-area .two-textarea .right-area .main-message .box .content-message .pic1 {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_31.png);
+  background-image: url(../images/12_15_31.png);
   margin: 10px 10px 0 30px;
 }
 .text-area .two-textarea .right-area .main-message .box .content-message .pic2 {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_03.png);
+  background-image: url(../images/12_15_03.png);
   margin: 10px 10px 0 30px;
 }
 .text-area .two-textarea .right-area .main-message .box .content-message .pic3 {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_31.png);
+  background-image: url(../images/12_15_31.png);
   margin: 10px 10px 0 30px;
 }
 .text-area .two-textarea .right-area .main-message .box .content-message .pic4 {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_03.png);
+  background-image: url(../images/12_15_03.png);
   margin: 10px 10px 0 30px;
 }
 .text-area .two-textarea .right-area .main-message .box .content-message .pic5 {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_31.png);
+  background-image: url(../images/12_15_31.png);
   margin: 10px 10px 0 30px;
 }
 .text-area .two-textarea .right-area .main-message .pic6 {
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_85.png);
+  background-image: url(../images/12_15_85.png);
 }
 .text-area .two-textarea .right-area .main-message .first-box {
   border-bottom: 1px solid #e6e9ec;
@@ -567,7 +567,7 @@ body {
   padding: 10px;
   background-color: #fafbfc; 
   float: left;
-  background-image: url(file:///E:/百度前端学院/12_15/images/12_15_85.png);
+  background-image: url(../images/12_15_85.png);
   background-size: 50% 50%;
   background-repeat: no-repeat;
   background-position: center;
