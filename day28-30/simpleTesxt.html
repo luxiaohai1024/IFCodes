@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>sup in messages</title>
+        <style>
+            .hiden {
+                display: none;
+            }
+            ul {
+                list-style: none;
+                width:max-content;
+                min-width: 162px;
+                background: rgb(224, 224, 221);
+                height: auto;
+                margin-top: 0;
+                
+            }
+            .active {
+                background: chartreuse;
+            }
+            li {
+                color:brown;
+                margin-left: -32px;
+                margin-bottom: 10px;
+            }
+            li:hover {
+                background: chartreuse
+            }
+            input {
+                width: 200px;
+                margin: 1px auto;
+            }
+            .wrapper {
+                width: 500px;
+                margin: 10px auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <input id="email-input" type="text">
+            <ul id="email-sug-wrapper" class="email-sug"></ul>
+        </div>
+        <script>
+            var HtmlUtil = {
+                /*1.用浏览器内部转换器实现html转码*/
+                htmlEncode:function (html){
+                    //1.首先动态创建一个容器标签元素，如DIV
+                    var temp = document.createElement ("div");
+                    //2.然后将要转换的字符串设置为这个元素的innerText(ie支持)或者textContent(火狐，google支持)
+                    (temp.textContent != undefined ) ? (temp.textContent = html) : (temp.innerText = html);
+                    //3.最后返回这个元素的innerHTML，即得到经过HTML编码转换的字符串了
+                    var output = temp.innerHTML;
+                    temp = null;
+                    return output;
+                },
+                /*2.用浏览器内部转换器实现html解码*/
+                htmlDecode:function (text){
+                    //1.首先动态创建一个容器标签元素，如DIV
+                    var temp = document.createElement("div");
+                    //2.然后将要转换的字符串设置为这个元素的innerHTML(ie，火狐，google都支持)
+                    temp.innerHTML = text;
+                    //3.最后返回这个元素的innerText(ie支持)或者textContent(火狐，google支持)，即得到经过HTML解码的字符串了。
+                    var output = temp.innerText || temp.textContent;
+                    temp = null;
+                    return output;
+                },
+                // /*3.用正则表达式实现html转码*/
+                // htmlEncodeByRegExp:function (str){ 
+                //     var s = "";
+                //     if(str.length == 0){
+                //         return "";
+                //     } 
+                //     s = str.replace(/&/g,"&");
+                //     s = s.replace(/</g,"<");
+                //     s = s.replace(/>/g,">");
+                //     s = s.replace(/ /g," ");
+                //     s = s.replace(/\'/g,"'");
+                //     s = s.replace(/\"/g,""");
+                //     return s; 
+                // },
+                // /*4.用正则表达式实现html解码*/
+                // htmlDecodeByRegExp:function (str){ 
+                //     var s = "";
+                //     if(str.length == 0) return "";
+                //     s = str.replace(/&/g,"&");
+                //     s = s.replace(/</g,"<");
+                //     s = s.replace(/>/g,">");
+                //     s = s.replace(/ /g," ");
+                //     s = s.replace(/'/g,"\'");
+                //     s = s.replace(/"/g,"\"");
+                //     return s; 
+                //     }
+                };
+            var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+            var emailInput = document.getElementById("email-input");
+            var sugWrapper = document.getElementById("email-sug-wrapper");
+            var messageInCode;
+            // var timer = emailInput.addEventListener("keyup",function(e){
+            //     // 获取用户输入，生成提示框中的提示内容，将提示内容添加到email-sug-wrapper中
+            //     // 控制email-sug-wrapper的显示/隐藏状态
+            //     e = event || window.event;
+            //     var trim = getInputText(e);
+            //     messageInCode = HtmlUtil.htmlEncode(trim);
+            //     addIntoWrapper(createBoxContent(messageInCode));
+            //     controlShow(trim);
+            // });
+            // 选择一个合适的DOM节点.监听鼠标点击 = function () {
+            //     if 被点击的是不是提示框中的Li节点 {
+            //         获取被点击Li对应的提示内容
+            //         将内容放到input输入框中
+            //         隐藏输入框
+            //     }
+            // }
+            var timer2 = sugWrapper.addEventListener('click',function(e){
+                if(e.target.nodeName == 'LI'){
+                    var message = e.target.innerHTML;
+                    emailInput.value = HtmlUtil.htmlDecode(message);
+                    hiden();
+                }
+            });
+            var index = 0; 
+            var child = sugWrapper.childNodes;
+            // 需要修改一下之前的inputDom的输入监听
+            var timer3 = emailInput.addEventListener('keyup',function(event) {
+                // 新增
+                // 如果按键不是上下及回车重置选中状态()
+                // 获取用户输入，生成提示框中的提示内容，将提示内容添加到email-sug-wrapper中
+                // 控制email-sug-wrapper的显示/隐藏状态 
+                event = event || window.event;
+                var trim = getInputText(event);
+                child = sugWrapper.childNodes;
+                messageInCode = HtmlUtil.htmlEncode(trim);
+                addIntoWrapper(createBoxContent(messageInCode));
+                controlShow(trim);
+                if (event.keyCode !== 13 && event.keyCode !== 38 && event.keyCode !== 40) {
+                    // Handle the event with KeyboardEvent.keyCode and set handled true.
+                    restart(child);
+                }
+            }, true);
+            
+            function restart(child) {
+                // 找到当前为选中状态的Li
+                // if (当前选中状态Li不是第一个) {
+                //     清除掉它的选中状态
+                //     设置第一个Li为选中状态
+                // }
+                if(document.getElementsByTagName('li')[0].className != 'active'){
+                    child[index].classList.remove('active');
+                    index = 0;
+                    child[index].classList.add('active');
+                }
+            }
+
+            // 监听特殊3个键的键盘事件，这个事件可能就是inputDom的输入监听，也有可能是另外一个，请自己测试后判断
+            var timer4 = emailInput.addEventListener('keyup',function(event) {
+                // 找到当前为选中状态的Li
+                // 清除掉它的选中状态
+                // if 按的是上键 {
+                //     if 找到的Li不是第一个 {
+                //         将它的前一个Li设为选中
+                //     } else {
+                //         将最后一个Li设为选中
+                //     }
+                // }
+                // if 按的是下键 {
+                //     if 找到的Li不是最后一个 {
+                //         将它的下一个Li设为选中
+                //     } else {
+                //         将第一个Li设为选中
+                //     }
+                // }
+
+                // if 按的是回车 {
+                //     将找到的Li的HTML内容解码后填到input中
+                //     隐藏提示框
+                // }
+                child = sugWrapper.childNodes;
+                if(event.keyCode == 38){
+                    child[index].classList.remove('active')
+                    index--
+                    if (index < 0) {
+                    index = child.length - 1;
+                    }
+                    child[index].classList.add('active');
+                }else if(event.keyCode == 40){
+                    if (index >= 0)
+                    child[index].classList.remove('active')
+                    index++
+                    if (index === child.length) {
+                    index = 0
+                    }
+                    child[index].classList.add('active');
+                }else if(event.keyCode == 13){
+                    emailInput.value = child[index].textContent;
+                    hiden();
+                }
+            });
+            // 失去焦点隐藏提示框
+            emailInput.addEventListener('blur', (e) => {
+            hiden();
+            })
+
+            // 获取焦点显示提示框
+            emailInput.addEventListener('focus', (e) => {
+
+            })
+
+            // 事件委托
+            sugWrapper.addEventListener('mousedown', (e) => {
+            if (e.target.tagName === 'LI') {
+                emailInput.value = e.target.textContent
+                hiden();
+                emailInput.focus()
+            }
+            })
+            function getInputText(e) {
+                // 拿到input输入框的输入内容trim后返回
+                return e.target.value;    
+            }
+
+            function createBoxContent(trim) {
+                // 用来拼接的用户输入内容 = 获取用户输入
+                // if 用户输入含有@ {
+                //     用来拼接的用户输入内容 = @之前的字符串
+                //     用来前缀匹配的用户输入内容 = @之后的字符串
+                // }    
+                // 遍历postfixList {
+                //     if 用来前缀匹配的用户输入内容前缀匹配遍历字符串元素
+                //         把用来拼接的用户输入内容和这个字符串进行结合成为一个Li
+                // }
+                // 返回生成的提示内容
+                var str = '';
+                var suitBefore = trim;
+                var suitAfter = null;
+                var regObj = /(^\s+)|(\s+$)/g;
+                if(trim.indexOf('@') != -1){
+                    suitBefore = trim.slice(0,trim.indexOf("@"));
+                    suitAfter = trim.slice(trim.indexOf("@") + 1,trim.length).replace(regObj,'');
+                }
+                for(let i = 0; i < postfixList.length; i++){
+                    if(postfixList[i].indexOf(suitAfter) != -1){
+                        str += "<li>" + suitBefore + "@" + postfixList[i] + "</li>";
+                    }else if(suitAfter == null){
+                        str += "<li>" + suitBefore + "@" + postfixList[i] + "</li>";
+                    }
+                }
+                return str;
+            }
+
+            function addIntoWrapper(inner) {
+                // 获取生成提示框中的提示内容
+                // 将内容添加到email-sug-wrapper中
+                sugWrapper.innerHTML = inner;
+            }
+
+            function controlShow(trim) {
+                // if 用户输入为空 {
+                //     隐藏提示框
+                // } else {
+                //     显示提示框
+                // }
+                var regObj = /(^\s+)|(\s+$)/g;
+                if(trim.replace(regObj,'') != ''){
+                    show();
+                }else{
+                    hiden();
+                }
+            }
+
+            function hiden() {
+                // 做具体隐藏提示框的操作
+                sugWrapper.className = "email-sug hiden";
+            }
+
+            function show() {
+                // 做具体显示提示框的操作
+                sugWrapper.className = "email-sug";
+            }
+        </script>
+    </body>
+</html>
